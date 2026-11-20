@@ -3,20 +3,76 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Cover Snap</title>
+<title>Palm Poster Lab — Snapshot Cover Maker</title>
 <link rel="stylesheet" href="./style.css">
 </head>
 <body>
 <main class="app">
-  <section class="controls">
-    <h1>Cover Snap</h1>
-    <p>A photo and a caption, made into a square cover.</p>
-    <label>Photo <input id="photo" type="file" accept="image/*"></label>
-    <label>Caption <input id="caption" type="text" maxlength="40" value="Sunset Heist"></label>
-    <button id="export" type="button">Export PNG 1080 x 1080</button>
+  <section class="controls" aria-label="Editor controls">
+    <h1>Palm Poster Lab</h1>
+    <p class="tagline">Tilted holiday snapshots on a painted sunset — arrange them into a shareable cover poster.</p>
+
+    <label class="field">Add your photos (up to 8, stays on your device)
+      <input id="photo" type="file" accept="image/*" multiple>
+    </label>
+
+    <label class="field">Cover title
+      <input id="title" type="text" maxlength="34" value="Vice Sunset Club">
+    </label>
+    <label class="field">Hand-written subtitle
+      <input id="subtitle" type="text" maxlength="44" value="wish you were here!">
+    </label>
+    <label class="field">Badge sticker text
+      <input id="badge" type="text" maxlength="12" value="EST. 2026">
+    </label>
+
+    <fieldset class="group">
+      <legend>Layout preset</legend>
+      <div class="row">
+        <button type="button" class="preset" data-preset="stack">Snapshot Stack</button>
+        <button type="button" class="preset" data-preset="row">Postcard Row</button>
+        <button type="button" class="preset" data-preset="billboard">Billboard Wide</button>
+      </div>
+    </fieldset>
+
+    <fieldset class="group">
+      <legend>Retro grade</legend>
+      <div class="row">
+        <label class="chip"><input type="radio" name="grade" value="golden" checked> Golden Hour</label>
+        <label class="chip"><input type="radio" name="grade" value="faded"> Faded Film</label>
+        <label class="chip"><input type="radio" name="grade" value="coral"> Coral Dusk</label>
+      </div>
+    </fieldset>
+
+    <label class="field">Export size
+      <select id="size">
+        <option value="square" selected>Square — 1080 × 1080</option>
+        <option value="portrait">Portrait — 1080 × 1350</option>
+        <option value="wide">Wide — 1920 × 1080</option>
+      </select>
+    </label>
+
+    <fieldset class="group">
+      <legend>Selected snapshot</legend>
+      <label class="field">Rotate <span id="rotVal">0°</span>
+        <input id="rotate" type="range" min="-32" max="32" step="1" value="0">
+      </label>
+      <label class="field">Scale <span id="scaleVal">100%</span>
+        <input id="scale" type="range" min="50" max="170" step="1" value="100">
+      </label>
+      <div class="row">
+        <button type="button" id="front">Bring to front</button>
+        <button type="button" id="remove">Remove card</button>
+      </div>
+      <p class="hint">Tip: drag a snapshot on the poster to move it. Click one to select it.</p>
+    </fieldset>
+
+    <button id="export" type="button">Export PNG</button>
     <p id="status" role="status"></p>
   </section>
-  <canvas id="cover" width="1080" height="1080" aria-label="The cover"></canvas>
+  <section class="stage">
+    <canvas id="cover" width="1080" height="1080" aria-label="Live cover preview"></canvas>
+  </section>
 </main>
 <script type="module" src="./src/main.js"></script>
 </body>

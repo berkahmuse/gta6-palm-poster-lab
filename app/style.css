@@ -1,12 +1,74 @@
-html, body { margin: 0; height: 100%; background: #f2f0f4; color: #1d1b22; font: 15px/1.4 system-ui, sans-serif; }
-.app { display: flex; gap: 32px; align-items: center; justify-content: center; height: 100%; padding: 24px; box-sizing: border-box; }
-.controls { display: flex; flex-direction: column; gap: 14px; width: 280px; }
-.controls h1 { margin: 0; font-size: 28px; }
-.controls p { margin: 0; color: #5c5866; }
-label { display: flex; flex-direction: column; gap: 6px; font-weight: 600; }
-input[type=text] { font: inherit; padding: 8px; border: 1px solid #c9c4d1; border-radius: 6px; }
-button { font: inherit; font-weight: 700; padding: 10px; border: 0; border-radius: 6px; background: #1d1b22; color: #fff; cursor: pointer; }
-canvas { width: min(70vh, 60vw); height: min(70vh, 60vw); box-shadow: 0 8px 30px rgba(0, 0, 0, 0.2); }
+@font-face {
+  font-family: 'Anton';
+  src: url('./fonts/Anton-Regular.ttf') format('truetype');
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Pacifico';
+  src: url('./fonts/Pacifico-Regular.ttf') format('truetype');
+  font-display: swap;
+}
+
+* { box-sizing: border-box; }
+html, body { margin: 0; min-height: 100%; }
+body {
+  background: #241631;
+  color: #fdf6ec;
+  font: 15px/1.45 system-ui, -apple-system, sans-serif;
+}
+.app {
+  display: flex; gap: 26px; align-items: flex-start; justify-content: center;
+  padding: 22px; max-width: 1440px; margin: 0 auto;
+}
+.controls {
+  display: flex; flex-direction: column; gap: 13px;
+  width: 308px; flex: 0 0 308px;
+  background: #31204a; border: 1px solid #4c3570; border-radius: 14px;
+  padding: 18px; max-height: calc(100vh - 44px); overflow-y: auto;
+}
+.controls h1 {
+  margin: 0; font-family: 'Anton', 'Arial Narrow', sans-serif;
+  font-size: 30px; letter-spacing: 1.5px; color: #ffd76a; font-weight: 400;
+}
+.tagline { margin: 0; color: #d9c8f2; font-size: 13.5px; }
+.field { display: flex; flex-direction: column; gap: 5px; font-weight: 600; font-size: 13.5px; }
+.field input[type="text"], .field select {
+  font: inherit; font-weight: 400; padding: 8px 9px;
+  border: 1px solid #5d478a; border-radius: 8px; background: #1e1233; color: #fdf6ec;
+}
+.field input[type="file"] { font: inherit; font-size: 13px; color: #d9c8f2; }
+.field input[type="range"] { width: 100%; accent-color: #ff7a5a; }
+.group { border: 1px solid #4c3570; border-radius: 10px; padding: 10px 12px 12px; margin: 0; }
+.group legend { font-weight: 700; font-size: 13px; padding: 0 5px; color: #ffd76a; }
+.row { display: flex; flex-wrap: wrap; gap: 7px; }
+button {
+  font: inherit; font-size: 13px; font-weight: 700; padding: 8px 11px;
+  border: 0; border-radius: 8px; background: #4c3570; color: #fdf6ec; cursor: pointer;
+}
+button:hover, button.active { background: #ff7a5a; color: #241631; }
+.chip {
+  display: inline-flex; align-items: center; gap: 5px; font-size: 13px; font-weight: 600;
+  background: #1e1233; border: 1px solid #5d478a; border-radius: 999px; padding: 5px 10px; cursor: pointer;
+}
+.chip input { accent-color: #ff7a5a; }
+.hint { margin: 6px 0 0; font-size: 12.5px; color: #b7a6d9; }
+#export { background: #ffd76a; color: #241631; font-size: 15px; padding: 11px; }
+#export:hover { background: #ff7a5a; }
+#status { margin: 0; min-height: 1.2em; font-size: 13px; color: #ffd76a; }
+.stage { flex: 1 1 auto; display: flex; justify-content: center; }
+canvas#cover {
+  max-width: 100%; max-height: calc(100vh - 44px); width: auto; height: auto;
+  box-shadow: 0 18px 50px rgba(0, 0, 0, 0.55); border-radius: 6px;
+  touch-action: none; cursor: grab; background: #7a2e6d;
+}
+canvas#cover:active { cursor: grabbing; }
+
+body.shot-cover { background: #000; }
 body.shot-cover .controls { display: none; }
-body.shot-cover .app { padding: 0; }
-body.shot-cover canvas { width: 100vw; height: 100vh; box-shadow: none; }
+body.shot-cover .app { padding: 0; max-width: none; }
+body.shot-cover .stage { display: block; }
+body.shot-cover canvas#cover {
+  display: block;
+  width: 100vw; height: 100vh; max-width: none; max-height: none;
+  box-shadow: none; border-radius: 0; cursor: default;
+}

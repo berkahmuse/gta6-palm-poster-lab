@@ -16,6 +16,11 @@ import { join } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { buildDossier } from './vendor/makefun-app.ts';
 
+// Palm Poster Lab — a make.fun gta6-cover-art-01 entry by berkahmuse: tilted snapshot
+// cards with washi-tape corners over a painted sunset, marker captions and retro grades.
+const ENTRY_TITLE = 'Palm Poster Lab — gta6-cover-art-01 (berkahmuse)';
+console.log(`[makefun] handing in: ${ENTRY_TITLE}`);
+
 const here = fileURLToPath(new URL('.', import.meta.url));
 const out = process.env.MAKEFUN_OUTPUT_DIR ?? '/output';
 
